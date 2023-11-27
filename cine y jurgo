@@ -1,0 +1,988 @@
+/*JUAN SERRANO Salas de cine */
+
+package peliculas;
+
+import java.util.Scanner;
+
+public class salas {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		/*
+		 * JUAN ESTEBAN SERRANO SIERRA FACULTAD DE INGENIERIA DISEÑO E INNOVACION 
+		 * Este programa tiene como objetivo facturar a las personas que ingresen a
+		 * cierta sala de cine, teniendo en cuenta si cumplen con el requisito de edad
+		 * para que al final se se muestre el precio que se tiene que pagar por la
+		 * entradas del cine y el numero de sillas que quedan disponibles de cada sala.
+		 * Empezamos declarando diferentes variables que contienen el numero de sillas
+		 * disponibles de cada genero de pelicula y despues cuantas sillas
+		 * preferenciales y generales hay en cada sala. Comienza validando el grupo de
+		 * personas que entraran a la pelicula y comienza un while que, dependiendo
+		 * cuantas veces quiere el usuario re
+		 * 
+		 * petir el proceso, preguntará al usuario
+		 * cuantas personas quiere enlistar a las peliculas (esto indicandole cuantas
+		 * personas puede enlistar a travez de la variable entera
+		 * "contadorperson").Luego, dependiendo de la pelicula que se haya elegido,
+		 * ingresa a un for que valida las edades de los integrantes, y genera el precio
+		 * de la silla segun la preferencia del usuario para que alfinal se almacene el
+		 * valor a pagar en la variable: "totalpa". Finalmente haya terminado el proceso
+		 * del for, si aun quedan usuarios se le pregunta al usuario si quiere continuar
+		 * con el proceso, en caso de que la respuesta sea negativa, se imprime lo que
+		 * se tiene que pagar y las sillas que quedaron disponibles en cada sala de cine
+		 */
+
+		Scanner teclado = new Scanner(System.in);
+		boolean vuelta = true;
+		int comedia = 30, animacion = 30, drama = 30, accion = 30, ficcion = 30, terror = 30, totalpa = 0,
+				contadorperson = 0;
+		int sillaspre1 = 10, sillasgen1 = 20;
+		int sillaspre2 = 10, sillasgen2 = 20;
+		int sillaspre3 = 10, sillasgen3 = 20;
+		int sillaspre4 = 10, sillasgen4 = 20;
+		int sillaspre5 = 10, sillasgen5 = 20;
+		int sillaspre6 = 10, sillasgen6 = 20;
+
+		System.out.println("Ingrese el numero de personas con las que desea ingresar a la sala");
+		int grupodepersonas = teclado.nextInt();
+		contadorperson = grupodepersonas + 1;
+		while (grupodepersonas <= 0) {
+			System.out.println("El numero de personas que ingresaste para entrar a nuestras salas no es valido.");
+			System.out.println("Si quieres intentarlo de nuevo ingresa un numero diferente de 0 para continuar");
+			System.out.println("Si ingresas 0 el programa se cerrará");
+			grupodepersonas = teclado.nextInt();
+			contadorperson = grupodepersonas;
+			if (grupodepersonas == 0) {
+				System.out.println("Gracias por utilizar el programa");
+				System.exit(0);
+			} // Este while condiciona el grupo de personas que ingresó el usuario
+
+		}
+		while (vuelta) {
+			System.out.println("Ingresa el género de pelicula que desea ver: ");
+			System.out.println("  ");
+			System.out.println("Comedia: Para todo publico (Ingrese 1)");
+			System.out.println("Animación: Para todo público (Ingrese 2)");
+			System.out.println("Drama: Para mayores de 12 años (Ingrese 3)");
+			System.out.println("Acción: Para mayores de 12 años (Ingrese 4)");
+			System.out.println("Ficción: Para mayores de 16 años (Ingrese 5)");
+			System.out.println("Terror: Para mayores de 19 años (Ingrese 6)");
+
+			int genero = teclado.nextInt();
+			while (genero <= 0 || genero >= 7) {
+				System.out.println("Ingresa un genero de los que te acabé de ofrecer");
+				System.out.println("Si quieres intentarlo de nuevo ingresa un género valido");
+				System.out.println("De lo contrario ingresa 0 y se cerrará el programa");
+				genero = teclado.nextInt();
+				if (genero == 0) {
+					System.out.println("Gracias por utilizar el programa");
+					System.exit(0);
+				}
+			} // Este while condiciona el genero que está ingresando el usuario
+
+			switch (genero) {
+
+			case 1: // COMEDIA
+				if (contadorperson == 0) {
+					System.out.println("Ya no tienes a mas gente la cual enlistar");
+					System.out.println("  ");
+					break;
+				} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+				if (comedia == 0) {
+
+					System.out.println("No puedes enlistar a más personas en la sala de comedia");
+					break;
+				} /*
+					 * En caso de que el usuario quiera ingresa a mas personas y no hayan sillas
+					 * disponibles SI ELIGE VOLVER A REALIZAR EL PROCESO DE RESERVA rompe con el
+					 * caso y pasa la parte de la tarifa
+					 */
+
+				System.out.println("Personas que puedes enlistar: " + (contadorperson - 1));
+				System.out.println("  ");
+				while (comedia > 0) {
+
+					for (int i = 1; i <= grupodepersonas; i++) {
+
+						if (comedia == 0) {
+							System.out.println("No puedes enlistar a más personas en la sala de comedia");
+							break;
+						} /* Rompe con el ciclo for para pasar a la parte de la tarifa */
+						contadorperson -= 1;
+						if (contadorperson == 0) {
+							System.out.println("Ya no puedes enlistar a mas personas!");
+							break;
+						}
+
+						System.out.println("Ingrese la edad del individuo: " + i);
+						int edad = teclado.nextInt();
+						while (edad <= 0) {
+							System.out.println("La edad que ingresaste no es valida o no es valida para esta pelicula");
+							System.out.println("Ingresa la edad del individuo: " + i);
+							System.out.println("Ingresa un numero menor o igual a 0 para cerrar el programa");
+							edad = teclado.nextInt();
+							if (edad <= 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // TERMINA EL WHILE PARA VALIDAD LA EDAD
+						System.out.println("  ");
+						System.out.println("La silla que quiere reservar es general (1) o preferencial (2)?");
+						System.out.println("Tienes " + sillaspre1 + " sillas preferenciales disponibles");
+						System.out.println("Tienes " + sillasgen1 + " sillas generales disponibles");
+						int pref = teclado.nextInt();
+						while (pref != 1 && pref != 2) {
+
+							System.out.println("Error, el numero que ingresaste no es una preferencia correcta ");
+							System.out.println("Ingresa 1 o 2 para seleccionar una prefencia de sillas valida");
+							System.out.println("  ");
+							System.out.println("Si quieres cancelar todo el proceso que llevas hasta ahora ingresa 0");
+							pref = teclado.nextInt();
+							if (pref == 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // FIN DEL WHILE QUE CONDICIONA LA PREFERENCIA DEL USUARIO
+						while (sillasgen1 == 0 && pref == 1) {
+							System.out.println("No puedes reservar mas sillas generales.");
+							System.out.println("Ingresa (2) para reservar una silla preferencial");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 2 para cerrar el programa ");
+							System.out.println("  ");
+
+							pref = teclado.nextInt();
+							if (pref != 2) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // Fin del while para cuando no es posible reservar sillas generales y el
+							// usuario optó por querer enlistar sillas generales
+						while (sillaspre1 == 0 && pref == 2) {
+							System.out.println("No puedes reservar mas sillas preferenciales");
+							System.out.println("Ingresa (1) para reservar una sillas general");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 1 para cerrar el programa ");
+							pref = teclado.nextInt();
+							if (pref != 1) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // fin del while para cuando no es posible reservar sillas preferenciales y el
+							// usuario optó por querer enlistar sillas preferenciales
+
+						switch (pref) {
+						case 1: // EN CASO DE QUE LA RESERVA SEA GENERAL
+							sillasgen1 -= 1;
+							comedia -= 1;
+							if (edad < 5 || edad > 65) {
+
+								totalpa += 0;
+
+							} else if (edad >= 5 && edad <= 12) {
+								totalpa += 4000;
+							} else {
+								totalpa += 8000;
+							}
+							break;
+						case 2: // EN CASO DE QUE LA RESERVA SEA PREFERENCIAL
+							sillaspre1 -= 1;
+							comedia -= 1;
+							if (edad < 5 || edad > 65) {
+
+								totalpa += 0;
+
+							} else if (edad >= 5 && edad <= 12) {
+								totalpa += 6000;
+							} else {
+								totalpa += 12000;
+							}
+							break;
+
+						} // FIN DEL SWITCH DE LA CUESTION PREFERENCIAL O GENERAL EN LA SALA DE COMEDIA
+
+					} // Fin del for para la sala de comedia
+					break; // Break del while para la sala comedia
+				}
+				break; // break del caso 1 (comedia)
+			case 2:// ANIMACION
+				if (contadorperson == 0) {
+					System.out.println("Ya no tienes a mas gente la cual enlistar");
+					System.out.println("  ");
+					break;
+				} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+				if (animacion == 0) {
+					System.out.println("No puedes enlistar a más personas en la sala de animacion");
+					System.out.println("  ");
+
+					break;
+				} /*
+					 * En caso de que el usuario quiera ingresa a mas personas y no hayan sillas
+					 * disponibles SI ELIGE VOLVER A REALIZAR EL PROCESO DE RESERVA rompe con el
+					 * caso y pasa la parte de la tarifa
+					 */
+				System.out.println("Personas que puedes enlistar: " + (contadorperson - 1));
+				System.out.println("  ");
+
+				while (animacion > 0) {
+					for (int i = 1; i <= grupodepersonas; i++) {
+
+						if (animacion == 0) {
+							System.out.println("No puedes enlistar a más personas en la sala de animacion");
+							break;
+						} /* Rompe con el ciclo for para pasar a la parte de la tarifa */
+						contadorperson -= 1;
+						if (contadorperson == 0) {
+							System.out.println("Ya no puedes enlistar a mas personas!");
+							break;
+						} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+						System.out.println("Ingrese la edad del individuo: " + i);
+						int edad = teclado.nextInt();
+						while (edad <= 0) {
+							System.out.println("La edad que ingresaste no es valida o no es valida para esta pelicula");
+							System.out.println("Ingresa la edad del individuo: " + i);
+							System.out.println("Ingresa un numero menor o igual a 0 para cerrar el programa");
+							edad = teclado.nextInt();
+							if (edad <= 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // TERMINA EL WHILE PARA VALIDAD LA EDAD
+						System.out.println("  ");
+						System.out.println("La silla que quiere reservar es general (1) o preferencial (2)?");
+						System.out.println("Tienes " + sillaspre2 + " sillas preferenciales disponibles");
+						System.out.println("Tienes " + sillasgen2 + " sillas generales disponibles");
+						int pref = teclado.nextInt();
+						while (pref != 1 && pref != 2) {
+
+							System.out.println("Error, el numero que ingresaste no es una preferencia correcta ");
+							System.out.println("Ingresa 1 o 2 para seleccionar una prefencia de sillas valida");
+							System.out.println("  ");
+							System.out.println("Si quieres cancelar todo el proceso que llevas hasta ahora ingresa 0");
+							pref = teclado.nextInt();
+							if (pref == 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // FIN DEL WHILE QUE CONDICIONA LA PREFERENCIA DEL USUARIO
+						while (sillasgen2 == 0 && pref == 1) {
+							System.out.println("No puedes reservar mas sillas generales.");
+							System.out.println("Ingresa (2) para reservar una silla preferencial");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 2 para cerrar el programa ");
+							System.out.println("  ");
+
+							pref = teclado.nextInt();
+							if (pref != 2) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} /*
+							 * Fin del while para cuando no es posible reservar sillas generales y el
+							 * usuario optó por querer enlistar sillas generales
+							 */
+						while (sillaspre2 == 0 && pref == 2) {
+							System.out.println("No puedes reservar mas sillas preferenciales");
+							System.out.println("Ingresa (1) para reservar una sillas general");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 1 para cerrar el programa ");
+							pref = teclado.nextInt();
+							if (pref != 1) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // Fin del while para cuando no es posible reservar sillas preferenciales y el
+							// usuario optó por querer enlistar sillas preferenciales
+
+						switch (pref) {
+						case 1: // EN CASO DE QUE LA RESERVA SEA GENERAL
+							sillasgen2 -= 1;
+							animacion -= 1;
+							if (edad < 5 || edad > 65) {
+
+								totalpa += 0;
+
+							} else if (edad >= 5 && edad <= 12) {
+								totalpa += 4000;
+							} else {
+								totalpa += 8000;
+							}
+							break;
+						case 2: // EN CASO DE QUE LA RESERVA SEA PREFERENCIAL
+							sillaspre2 -= 1;
+							animacion -= 1;
+							if (edad < 5 || edad > 65) {
+
+								totalpa += 0;
+
+							} else if (edad >= 5 && edad <= 12) {
+								totalpa += 6000;
+							} else {
+								totalpa += 12000;
+							}
+							break;
+
+						} // FIN DEL SWITCH DE LA CUESTION PREFERENCIAL O GENERAL EN LA SALA DE ANIMACION
+
+					} // Fin del for para la sala de animacion
+					break; // Break del while para la sala animacion
+				}
+
+				break; // break del caso 2 (animacion)
+			case 3:// DRAMA
+				if (contadorperson == 0) {
+					System.out.println("Ya no tienes a mas gente la cual enlistar");
+					System.out.println("  ");
+					break;
+				} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+				if (drama == 0) {
+					System.out.println("No puedes enlistar a más personas en la sala de drama");
+					System.out.println("  ");
+
+					break;
+				} /*
+					 * En caso de que el usuario quiera ingresa a mas personas y no hayan sillas
+					 * disponibles SI ELIGE VOLVER A REALIZAR EL PROCESO DE RESERVA rompe con el
+					 * caso y pasa la parte de la tarifa
+					 */
+				System.out.println("Personas que puedes enlistar: " + (contadorperson - 1));
+				System.out.println("  ");
+
+				while (drama > 0) {
+					for (int i = 1; i <= grupodepersonas; i++) {
+
+						if (drama == 0) {
+							System.out.println("No puedes enlistar a más personas en la sala de drama");
+							break;
+						} /* Rompe con el ciclo for para pasar a la parte de la tarifa */
+						contadorperson -= 1;
+						if (contadorperson == 0) {
+							System.out.println("Ya no puedes enlistar a mas personas!");
+							break;
+						} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+						System.out.println("Ingrese la edad del individuo: " + i);
+						int edad = teclado.nextInt();
+						while (edad <= 12) {
+							System.out.println("La edad que ingresaste no es valida o no es valida para esta pelicula");
+							System.out.println("Ingresa la edad del individuo: " + i);
+							System.out.println("Ingresa un numero menor o igual a 12 para cerrar el programa");
+							edad = teclado.nextInt();
+							if (edad <= 12) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // TERMINA EL WHILE PARA VALIDAD LA EDAD
+						System.out.println("  ");
+						System.out.println("La silla que quiere reservar es general (1) o preferencial (2)?");
+						System.out.println("Tienes " + sillaspre3 + " sillas preferenciales disponibles");
+						System.out.println("Tienes " + sillasgen3 + " sillas generales disponibles");
+						int pref = teclado.nextInt();
+						while (pref != 1 && pref != 2) {
+
+							System.out.println("Error, el numero que ingresaste no es una preferencia correcta ");
+							System.out.println("Ingresa 1 o 2 para seleccionar una prefencia de sillas valida");
+							System.out.println("  ");
+							System.out.println("Si quieres cancelar todo el proceso que llevas hasta ahora ingresa 0");
+							pref = teclado.nextInt();
+							if (pref == 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // FIN DEL WHILE QUE CONDICIONA LA PREFERENCIA DEL USUARIO
+						while (sillasgen3 == 0 && pref == 1) {
+							System.out.println("No puedes reservar mas sillas generales.");
+							System.out.println("Ingresa (2) para reservar una silla preferencial");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 2 para cerrar el programa ");
+							System.out.println("  ");
+
+							pref = teclado.nextInt();
+							if (pref != 2) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} /*
+							 * Fin del while para cuando no es posible reservar sillas generales y el
+							 * usuario optó por querer enlistar sillas generales
+							 */
+						while (sillaspre3 == 0 && pref == 2) {
+							System.out.println("No puedes reservar mas sillas preferenciales");
+							System.out.println("Ingresa (1) para reservar una sillas general");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 1 para cerrar el programa ");
+							pref = teclado.nextInt();
+							if (pref != 1) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // Fin del while para cuando no es posible reservar sillas preferenciales y el
+							// usuario optó por querer enlistar sillas preferenciales
+
+						switch (pref) {
+						case 1: // EN CASO DE QUE LA RESERVA SEA GENERAL
+							sillasgen3 -= 1;
+							drama -= 1;
+							if (edad > 65) {
+								totalpa += 0;
+
+							} else {
+								totalpa += 8000;
+							}
+							break;
+						case 2: // EN CASO DE QUE LA RESERVA SEA PREFERENCIAL
+							sillaspre3 -= 1;
+							drama -= 1;
+							if (edad > 65) {
+
+								totalpa += 0;
+
+							} else {
+								totalpa += 12000;
+							}
+							break;
+
+						} // FIN DEL SWITCH DE LA CUESTION PREFERENCIAL O GENERAL EN LA SALA DE DRAMA
+
+					} // Fin del for para la sala de drama
+					break; // Break del while para la sala drama
+				}
+
+				break; // break del caso 3 (drama)
+			case 4:// ACCION
+				if (contadorperson == 0) {
+					System.out.println("Ya no tienes a mas gente la cual enlistar");
+					System.out.println("  ");
+					break;
+				} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+				if (accion == 0) {
+					System.out.println("No puedes enlistar a más personas en la sala de accion");
+					System.out.println("  ");
+
+					break;
+				} /*
+					 * En caso de que el usuario quiera ingresa a mas personas y no hayan sillas
+					 * disponibles SI ELIGE VOLVER A REALIZAR EL PROCESO DE RESERVA rompe con el
+					 * caso y pasa la parte de la tarifa
+					 */
+				System.out.println("Personas que puedes enlistar: " + (contadorperson - 1));
+				System.out.println("  ");
+
+				while (accion > 0) {
+					for (int i = 1; i <= grupodepersonas; i++) {
+
+						if (accion == 0) {
+							System.out.println("No puedes enlistar a más personas en la sala de accion");
+							break;
+						} /* Rompe con el ciclo for para pasar a la parte de la tarifa */
+						contadorperson -= 1;
+						if (contadorperson == 0) {
+							System.out.println("Ya no puedes enlistar a mas personas!");
+							break;
+						} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+						System.out.println("Ingrese la edad del individuo: " + i);
+						int edad = teclado.nextInt();
+						while (edad <= 12) {
+							System.out.println("La edad que ingresaste no es valida o no es valida para esta pelicula");
+							System.out.println("Ingresa la edad del individuo: " + i);
+							System.out.println("Ingresa un numero menor o igual a 12 para cerrar el programa");
+							edad = teclado.nextInt();
+							if (edad <= 12) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // TERMINA EL WHILE PARA VALIDAD LA EDAD
+						System.out.println("  ");
+						System.out.println("La silla que quiere reservar es general (1) o preferencial (2)?");
+						System.out.println("Tienes " + sillaspre4 + " sillas preferenciales disponibles");
+						System.out.println("Tienes " + sillasgen4 + " sillas generales disponibles");
+						int pref = teclado.nextInt();
+						while (pref != 1 && pref != 2) {
+
+							System.out.println("Error, el numero que ingresaste no es una preferencia correcta ");
+							System.out.println("Ingresa 1 o 2 para seleccionar una prefencia de sillas valida");
+							System.out.println("  ");
+							System.out.println("Si quieres cancelar todo el proceso que llevas hasta ahora ingresa 0");
+							pref = teclado.nextInt();
+							if (pref == 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // FIN DEL WHILE QUE CONDICIONA LA PREFERENCIA DEL USUARIO
+						while (sillasgen4 == 0 && pref == 1) {
+							System.out.println("No puedes reservar mas sillas generales.");
+							System.out.println("Ingresa (2) para reservar una silla preferencial");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 2 para cerrar el programa ");
+							System.out.println("  ");
+
+							pref = teclado.nextInt();
+							if (pref != 2) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} /*
+							 * Fin del while para cuando no es posible reservar sillas generales y el
+							 * usuario optó por querer enlistar sillas generales
+							 */
+						while (sillaspre4 == 0 && pref == 2) {
+							System.out.println("No puedes reservar mas sillas preferenciales");
+							System.out.println("Ingresa (1) para reservar una sillas general");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 1 para cerrar el programa ");
+							pref = teclado.nextInt();
+							if (pref != 1) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // Fin del while para cuando no es posible reservar sillas preferenciales y el
+							// usuario optó por querer enlistar sillas preferenciales
+
+						switch (pref) {
+						case 1: // EN CASO DE QUE LA RESERVA SEA GENERAL
+							sillasgen4 -= 1;
+							accion -= 1;
+							if (edad > 65) {
+								totalpa += 0;
+
+							} else {
+								totalpa += 8000;
+							}
+							break;
+						case 2: // EN CASO DE QUE LA RESERVA SEA PREFERENCIAL
+							sillaspre4 -= 1;
+							accion -= 1;
+							if (edad > 65) {
+
+								totalpa += 0;
+
+							} else {
+								totalpa += 12000;
+							}
+							break;
+
+						} // FIN DEL SWITCH DE LA CUESTION PREFERENCIAL O GENERAL EN LA SALA DE ACCION
+
+					} // Fin del for para la sala de accion
+					break; // Break del while para la sala accion
+				}
+				break; // break del caso 4 (accion)
+			case 5: // FICCION
+				if (contadorperson == 0) {
+					System.out.println("Ya no tienes a mas gente la cual enlistar");
+					System.out.println("  ");
+					break;
+				} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+				if (ficcion == 0) {
+					System.out.println("No puedes enlistar a más personas en la sala de ficcion");
+					System.out.println("  ");
+
+					break;
+				} /*
+					 * En caso de que el usuario quiera ingresa a mas personas y no hayan sillas
+					 * disponibles SI ELIGE VOLVER A REALIZAR EL PROCESO DE RESERVA rompe con el
+					 * caso y pasa la parte de la tarifa
+					 */
+				System.out.println("Personas que puedes enlistar: " + (contadorperson - 1));
+				System.out.println("  ");
+
+				while (ficcion > 0) {
+					for (int i = 1; i <= grupodepersonas; i++) {
+
+						if (ficcion == 0) {
+							System.out.println("No puedes enlistar a más personas en la sala de ficcion");
+							break;
+						} /* Rompe con el ciclo for para pasar a la parte de la tarifa */
+						contadorperson -= 1;
+						if (contadorperson == 0) {
+							System.out.println("Ya no puedes enlistar a mas personas!");
+							break;
+						} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+						System.out.println("Ingrese la edad del individuo: " + i);
+						int edad = teclado.nextInt();
+						while (edad <= 16) {
+							System.out.println("La edad que ingresaste no es valida o no es valida para esta pelicula");
+							System.out.println("Ingresa la edad del individuo: " + i);
+							System.out.println("Ingresa un numero menor o igual a 16 para cerrar el programa");
+							edad = teclado.nextInt();
+							if (edad <= 16) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // TERMINA EL WHILE PARA VALIDAD LA EDAD
+						System.out.println("  ");
+						System.out.println("La silla que quiere reservar es general (1) o preferencial (2)?");
+						System.out.println("Tienes " + sillaspre5 + " sillas preferenciales disponibles");
+						System.out.println("Tienes " + sillasgen5 + " sillas generales disponibles");
+						int pref = teclado.nextInt();
+						while (pref != 1 && pref != 2) {
+
+							System.out.println("Error, el numero que ingresaste no es una preferencia correcta ");
+							System.out.println("Ingresa 1 o 2 para seleccionar una prefencia de sillas valida");
+							System.out.println("  ");
+							System.out.println("Si quieres cancelar todo el proceso que llevas hasta ahora ingresa 0");
+							pref = teclado.nextInt();
+							if (pref == 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // FIN DEL WHILE QUE CONDICIONA LA PREFERENCIA DEL USUARIO
+						while (sillasgen5 == 0 && pref == 1) {
+							System.out.println("No puedes reservar mas sillas generales.");
+							System.out.println("Ingresa (2) para reservar una silla preferencial");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 2 para cerrar el programa ");
+							System.out.println("  ");
+
+							pref = teclado.nextInt();
+							if (pref != 2) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} /*
+							 * Fin del while para cuando no es posible reservar sillas generales y el
+							 * usuario optó por querer enlistar sillas generales
+							 */
+						while (sillaspre5 == 0 && pref == 2) {
+							System.out.println("No puedes reservar mas sillas preferenciales");
+							System.out.println("Ingresa (1) para reservar una sillas general");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 1 para cerrar el programa ");
+							pref = teclado.nextInt();
+							if (pref != 1) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // Fin del while para cuando no es posible reservar sillas preferenciales y el
+							// usuario optó por querer enlistar sillas preferenciales
+
+						switch (pref) {
+						case 1: // EN CASO DE QUE LA RESERVA SEA GENERAL
+							sillasgen5 -= 1;
+							ficcion -= 1;
+							if (edad > 65) {
+								totalpa += 0;
+
+							} else {
+								totalpa += 8000;
+							}
+							break;
+						case 2: // EN CASO DE QUE LA RESERVA SEA PREFERENCIAL
+							sillaspre5 -= 1;
+							ficcion -= 1;
+							if (edad > 65) {
+
+								totalpa += 0;
+
+							} else {
+								totalpa += 12000;
+							}
+							break;
+
+						} // FIN DEL SWITCH DE LA CUESTION PREFERENCIAL O GENERAL EN LA SALA DE FICCION
+
+					} // Fin del for para la sala de ficcion
+					break; // Break del while para la sala ficcion
+				}
+				break; // break del caso 5 (ficcion)
+			case 6:// TERROR
+				if (contadorperson == 0) {
+					System.out.println("Ya no tienes a mas gente la cual enlistar");
+					System.out.println("  ");
+					break;
+				} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+				if (terror == 0) {
+					System.out.println("No puedes enlistar a más personas en la sala de terror");
+					System.out.println("  ");
+
+					break;
+				} /*
+					 * En caso de que el usuario quiera ingresa a mas personas y no hayan sillas
+					 * disponibles SI ELIGE VOLVER A REALIZAR EL PROCESO DE RESERVA rompe con el
+					 * caso y pasa la parte de la tarifa
+					 */
+				System.out.println("Personas que puedes enlistar: " + (contadorperson - 1));
+				System.out.println("  ");
+
+				while (terror > 0) {
+					for (int i = 1; i <= grupodepersonas; i++) {
+
+						if (terror == 0) {
+							System.out.println("No puedes enlistar a más personas en la sala de terror");
+							break;
+						} /* Rompe con el ciclo for para pasar a la parte de la tarifa */
+						contadorperson -= 1;
+						if (contadorperson == 0) {
+							System.out.println("Ya no puedes enlistar a mas personas!");
+							break;
+						} // QUE PASA SI YA NO TIENES GENTE PARA RESERVARLE SILLAS?
+						System.out.println("Ingrese la edad del individuo: " + i);
+						int edad = teclado.nextInt();
+						while (edad <= 19) {
+							System.out.println("La edad que ingresaste no es valida o no es valida para esta pelicula");
+							System.out.println("Ingresa la edad del individuo: " + i);
+							System.out.println("Ingresa un numero menor o igual a 19 para cerrar el programa");
+							edad = teclado.nextInt();
+							if (edad <= 19) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // TERMINA EL WHILE PARA VALIDAD LA EDAD
+						System.out.println("  ");
+						System.out.println("La silla que quiere reservar es general (1) o preferencial (2)?");
+						System.out.println("Tienes " + sillaspre6 + " sillas preferenciales disponibles");
+						System.out.println("Tienes " + sillasgen6 + " sillas generales disponibles");
+						int pref = teclado.nextInt();
+						while (pref != 1 && pref != 2) {
+
+							System.out.println("Error, el numero que ingresaste no es una preferencia correcta ");
+							System.out.println("Ingresa 1 o 2 para seleccionar una prefencia de sillas valida");
+							System.out.println("  ");
+							System.out.println("Si quieres cancelar todo el proceso que llevas hasta ahora ingresa 0");
+							pref = teclado.nextInt();
+							if (pref == 0) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // FIN DEL WHILE QUE CONDICIONA LA PREFERENCIA DEL USUARIO
+						while (sillasgen6 == 0 && pref == 1) {
+							System.out.println("No puedes reservar mas sillas generales.");
+							System.out.println("Ingresa (2) para reservar una silla preferencial");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 2 para cerrar el programa ");
+							System.out.println("  ");
+
+							pref = teclado.nextInt();
+							if (pref != 2) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} /*
+							 * Fin del while para cuando no es posible reservar sillas generales y el
+							 * usuario optó por querer enlistar sillas generales
+							 */
+						while (sillaspre6 == 0 && pref == 2) {
+							System.out.println("No puedes reservar mas sillas preferenciales");
+							System.out.println("Ingresa (1) para reservar una sillas general");
+							System.out.println("  ");
+							System.out.println("O ingresa un valor diferente de 1 para cerrar el programa ");
+							pref = teclado.nextInt();
+							if (pref != 1) {
+								System.out.println("Gracias por utilizar el programa");
+								System.exit(0);
+							}
+						} // Fin del while para cuando no es posible reservar sillas preferenciales y el
+							// usuario optó por querer enlistar sillas preferenciales
+
+						switch (pref) {
+						case 1: // EN CASO DE QUE LA RESERVA SEA GENERAL
+							sillasgen6 -= 1;
+							terror -= 1;
+							if (edad > 65) {
+								totalpa += 0;
+
+							} else {
+								totalpa += 8000;
+							}
+							break;
+						case 2: // EN CASO DE QUE LA RESERVA SEA PREFERENCIAL
+							sillaspre6 -= 1;
+							terror -= 1;
+							if (edad > 65) {
+
+								totalpa += 0;
+
+							} else {
+								totalpa += 12000;
+							}
+							break;
+
+						} // FIN DEL SWITCH DE LA CUESTION PREFERENCIAL O GENERAL EN LA SALA DE TERROR
+
+					} // Fin del for para la sala de terror
+					break; // Break del while para la sala terror
+				}
+				break; // break del caso 6 (terror)
+
+			} // TERMINA EL SWITCH DE LOS GENEROS
+
+			System.out.println("Quieres seguir proceso? si es asi ingresa un valor diferente de 0");
+			System.out.println("Si quieres finalizar este proceso y obtener tu total a pagar, escribe 0");
+			int decision = teclado.nextInt();
+			if (decision == 0) {
+				vuelta = false;
+			}
+
+		} // TERMINA EL WHILE DE: ¿QUIERES EMPEZAR DE NUEVO?
+		System.out.println("valor total a pagar: " + totalpa);
+		System.out.println("  ");
+		System.out.println("comedia: " + comedia);
+		System.out.println("animacion: " + animacion);
+		System.out.println("drama: " + drama);
+		System.out.println("accion: " + accion);
+		System.out.println("ficcion: " + ficcion);
+		System.out.println("terror: " + terror);
+		System.out.println("  ");
+		System.out.println("  ");
+		System.out.println("Gracias por utilizar el programa");
+
+	}
+
+}
+
+
+Clase 2:
+import javax.swing.*; //Usamos la bibliteca swing que nos ayuda a manejar todas las funciones que contiene una interfaz grafica 
+import java.awt.*; //Tambien se usa para el maneja de interfces graficas 
+import java.awt.event.*; //Tambien se usa para el manejo de interfaces graficas 
+
+public class Guia { // nombre de la clase principal
+
+	private static final int BOARD_SIZE = 10; // representan constantes que establecen el tamaño del tablero del juego,
+												// la posicion en que el jugador gana y la penalizacion en caso de que
+												// un jugador alcance a otro
+	private static final int WINNING_POSITION = 100;
+	private static final int PENALTY = -4;
+	private static int[][] tablero = new int[BOARD_SIZE][BOARD_SIZE]; // es la matriz que representa visualmente el
+																		// tablero de juego
+	private static int[] jugadores = { 0, 0 }; // vector que representa los 2 jugadores que participaran
+	private static JLabel jugador1Label; // son etiquetas, con ellas podemos mostrar el contenido que nos enseña el
+											// jugador 1, el jugador 2 y el tablero del codigo
+	private static JLabel jugador2Label;
+	private static JPanel tableroPanel;
+
+	private static int lanzarDado() { // metodo que simula el lanzamiento del dado, este dado tiene valores entre 6 y
+										// uno
+		return new java.util.Random().nextInt(6) + 1; // contiene la instancia de la biblioteca Random, para adquirir un
+														// valor entre 1 y 6
+
+	}
+
+	private static void inicializarTablero() { // metodo que nos ayuda en asignar casillas de cada tablero en la matriz
+												// "tablero"
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			for (int j = 0; j < BOARD_SIZE; j++) {
+				tablero[i][j] = i * BOARD_SIZE + j + 1;
+			}
+
+		}
+
+	}
+
+	private static void imprimirTablero() { /*
+											 * Define un metodo que cambia la representacion grafica de la impresion del
+											 * tablero en el panel que contiene la interfaz establece tamaño, ubicacion,
+											 * qué color de fecha le corresponde a cada jugador, entre otras tareas
+											 */
+		tableroPanel.removeAll();
+		tableroPanel.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			for (int j = 0; j < BOARD_SIZE; j++) {
+				JLabel label = new JLabel(String.valueOf(tablero[i][j]));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				if (tablero[i][j] == jugadores[0]) {
+					label.setBackground(Color.RED);
+				} else if (tablero[i][j] == jugadores[1]) {
+					label.setBackground(Color.BLUE);
+				} else {
+					label.setBackground(Color.WHITE);
+				}
+				label.setOpaque(true);
+				tableroPanel.add(label);
+			}
+
+		}
+		tableroPanel.revalidate();
+		tableroPanel.repaint();
+
+	}
+
+	private static void realizarPenalizacion() { // define un metodo que obliga al jugador 2 a retroceder 4 casillas en
+													// casi de que alcance al jugador 1
+		jugadores[1] += PENALTY;
+		JOptionPane.showMessageDialog(null, "Emergencia: Jugador 2 retrocede 4 casillas como penalización.");
+	}
+
+	public static void main(String[] args) { // inicio del metodo main
+		inicializarTablero(); // llama al metodo de inicializar tablero para imprimir el tablero
+		JFrame frame = new JFrame("Juego de Escaleras y Serpientes"); // crea un nuevo objeto JFrame llamado "Juego de
+																		// Escaleras y Serpientes"
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLayout(new BorderLayout());
+		jugador1Label = new JLabel("Jugador 1 = " + jugadores[0]); // suma la cantidad necesaria a la matriz que adjunta
+																	// la cantidad de casillas que se movio el jugador 1
+		jugador2Label = new JLabel("Jugador 2 = " + jugadores[1]); // suma la cantidad necesaria a la matriz que adjunta
+																	// la cantidad de casillas que se movio el jugador 2
+		tableroPanel = new JPanel(); // crea un nuevo objeto panek
+		JButton lanzarDadoButton1 = new JButton("Lanzar Dado (S)"); // crea un boton que pide oprimir el boton s
+		lanzarDadoButton1.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("S"),
+				"lanzarDado1"); // verifica que el usuario esté oprimiendo al tecla S para darle movimiento al
+								// jugador 1
+		lanzarDadoButton1.getActionMap().put("lanzarDado1", new AbstractAction() {
+			@Override // El proposito de Override Su propósito principal es proporcionar una
+						// verificación adicional en tiempo
+						// de compilación para asegurarse de que el método anotado esté realmente
+						// sobrescribiendo un método existente
+			public void actionPerformed(ActionEvent e) {
+				lanzarDado(0); // Player 1
+			}
+
+		});
+
+		frame.add(lanzarDadoButton1, BorderLayout.NORTH); // Agrega el botón lanzarDadoButton1 en la región norte
+															// (NORTH) del BorderLayout de la ventana (frame). Este
+															// botón está asociado al jugador 1 y se utiliza para lanzar
+															// el dado cuando se presiona la tecla "S".
+		frame.add(tableroPanel, BorderLayout.CENTER); // Agrega el panel tableroPanel en la región central (CENTER).
+														// Este panel se utiliza para
+														// mostrar la representación gráfica del tablero de juego.
+		frame.add(jugador1Label, BorderLayout.WEST); // Esta etiqueta muestra la informacion del jugador 1 en el lado
+														// oeste del panel de juego
+		frame.add(jugador2Label, BorderLayout.EAST); // Esta etiqueta muestra la informacion del jugador 2 en el lado
+														// este del panel de juego
+		JButton lanzarDadoButton2 = new JButton("Lanzar Dado (M)"); // crea un nuevo boton para validar que al oprimir
+																	// la tecla M, el jugador 2 se movera al oprimir
+																	// esta tecla
+		lanzarDadoButton2.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("M"),
+				"lanzarDado2");
+		lanzarDadoButton2.getActionMap().put("lanzarDado2", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lanzarDado(1);
+			}
+
+		});
+		frame.add(lanzarDadoButton2, BorderLayout.SOUTH); // enseña al lado sur del panel un letrero que busca que el
+															// usuario lance el dado, esto desde la tecla M, lo que
+															// significa que sera el turno del jugador 2
+		frame.setSize(600, 600); // Establece el tamaño de la ventana en 600x600 pixeles
+		frame.setVisible(true); // Sera visible? Si
+		frame.setFocusable(true); // Sera apta para que el usuario pueda interactuar con esta interfaz? Si
+	}
+
+	private static void lanzarDado(int jugador) { // define un metodo que establece el resutlado obtenido de lanzar el
+													// dado
+		int dadoResultado = lanzarDado(); // almacena l resultado de lanzar el dado en esta variable
+		System.out.println("Jugador " + (jugador + 1) + " ha lanzado el dado: " + dadoResultado);
+		jugadores[jugador] += dadoResultado; // sea el jugador que sea, el resultado del dado se almacena en el espacio
+												// de aquel jugador
+//comienzan una serie de condicionales descritos en la parte logica 
+		if (jugadores[0] == jugadores[1]) { // en caso de que los jugadores estan en la misma casilla se hace la
+											// penalizacion
+			System.out.println("¡Ambos jugadores están en la misma casilla!");
+			realizarPenalizacion();
+		}
+		imprimirTablero(); // se imprime el tablero
+
+		if (jugadores[0] >= WINNING_POSITION) { // en caso de que alguno de los jugadores haya llegado a la casilla de
+												// destino
+			JOptionPane.showMessageDialog(null, "El jugador 1 ha ganado! Fin del juego.");
+			System.exit(0);
+		} else if (jugadores[1] >= WINNING_POSITION) {
+			JOptionPane.showMessageDialog(null, "El jugador 2 ha ganado! Fin del juego.");
+			System.exit(0);
+		}
+		//
+		jugador1Label.setText("Jugador 1 = " + jugadores[0]);
+		jugador2Label.setText("Jugador 2 = " + jugadores[1]);
+	}
+}
